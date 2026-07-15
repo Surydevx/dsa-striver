@@ -1,19 +1,19 @@
-from collections import deque
 class Solution:
     def secondLargestElement(self, nums):
-        s = set(nums)
-        if len(s) > 1:
-            pass
+        first = float("-inf")
+        second = float("-inf")
+
+        for num in nums:
+            if num > second and num > first:
+                first, second = num, first
+            elif num > second and num < first:
+                second = num
+            elif num > second and num == first:
+                pass
+
+        if first != second and second != float("-inf"):
+            return second
+        elif second == float("-inf"):
+            return -1
         else:
             return -1
-        row = deque(list(s))
-        for w in range(len(row)-1):
-                if row[0]< row[w+1]:
-                    row[0],row[w+1] = row[w+1],row[0]
-        first_item = row.popleft()
-        for w in range(len(row)-1):
-                if row[0]< row[w+1]:
-                    row[0],row[w+1] = row[w+1],row[0]
-        second_item = row.popleft()
-        return second_item
-
